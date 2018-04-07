@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block head %}<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW"> {% endblock %}
+{% block title_block %}{{ user.username }} Profile{% endblock %}
+{% block content %}
+<script>$("#username_profile_link").css({'border-bottom': '2px solid black'});</script>
+<link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}">
+<body>
+  <div id="profile-content">
+  <div id="personal-details"><h3>Profile Details</h3>
+    <div id="personal-details-container">
+    <li id="first_name">
+      <div id="first_name_row">
+        <div class="first_sub_row" id="heading">First Name</div>
+        <div class="second_sub_row" id="first_name">{{ user_personal_info.first_name }}</div>
+        <div class="third_sub_row" id="edit_button"><button id="edit_first_name_btn">Edit</button></div>
+      </div>
+    </li>
+    <li id="last_name">
+      <div id="last_name_row">
+        <div class="first_sub_row" id="last_name_heading">Last Name</div>
+        <div class="second_sub_row" id="last_name">{{ user_personal_info.last_name }}</div>
+        <div class="third_sub_row" id="edit_button"><button id="edit_last_name_btn">Edit</button></div>
+      </div>
+    </li>
+    <li id="email">
+      <div id="email_row">
+        <div class="first_sub_row" id="email_heading">Email ID</div>
+        <div class="second_sub_row" id="email_id">{{ user_personal_info.email }}</div>
+        <div class="third_sub_row" id="edit_button"><button id="edit_email_btn">Edit</button></div>
+      </div>
+    </li></div>
+    <script>
+      $(document).ready(function(){
+        $("#edit_button button").one("click", function(){
+          var row_div = $(this).parent().parent().attr('id');
+          var aa = $("#"+row_div).parent().attr('id');
+          var label_text = $("#"+row_div+' .first_sub_row').text();
+          var csrf = "{% csrf_token %}";
+          $("#"+row_div).append('<div id="temporary-edit-form"><form method="post" action="">'+csrf+'<input type="hidden" name="label" value="'+aa+'"><input type="hidden" name="change_type" value="pers_details"><input type="text" placeholder="Your '+label_text+'" name="val"><input type="submit" value="change"></form></div>');
+        });
+        $("#edit_button_adr button").one("click", function(){
+          var row_div = $(this).parent().parent().attr('id');
+          var aa = $("#"+row_div).parent().attr('id');
+          var label_text = $("#"+row_div+' .first_sub_row').text();
+          var csrf = "{% csrf_token %}";
+
+          $("#"+row_div).append('<div id="temporary-edit-form"><form method="post" action="">'+csrf+'<input type="hidden" name="label" value="'+aa+'"><input type="hidden" name="change_type" value="addr_details"><input type="text" placeholder="Your '+label_text+'" name="val"><input type="submit" value="change"></form></div>');
+        });
+        $("#pin_row button").click(function(){var adr_chg = $("#pin_row input[type=text]");
+        adr_chg.attr('type', 'number');
+        adr_chg.attr('min', '100000');
+        adr_chg.attr('max', '999999');
+      });
+      });
+    </script>
+  </div>
+    <div id="other-details">
+      <div id="delievery_address">
+        <h3>Delievery Address</h3>
+        <div id="other-details-container">
+    {% for address in user_addresses %}
+    <li id="house_no">
+      <div id="house_no_row">
+        <div class="first_sub_row" id="house_no_heading">House Name/No./Flat No.</div>
+        <div class="second_sub_row" id="house_number">{{ address.house_no }}</div>
+        <div class="third_sub_row" id="edit_button_adr"><button id="edit_house_no_btn">Edit</button></div>
+      </div>
+    </li>
+    <li id="district">
+      <div id="district_row">
+        <div class="first_sub_row" id="district_heading">District</div>
+        <div class="second_sub_row" id="district_name">{{ address.district }}</div>
+
+      </div>
+    </li>
+    <li id="state">
+      <div id="state_row">
+        <div class="first_sub_row" id="state_heading">State</div>
+        <div class="second_sub_row" id="state_name">{{ address.state }}</div>
+
+      </div>
+    </li>
+    <li id="pin">
+      <div id="pin_row">
+        <div class="first_sub_row" id="pin_heading">PIN Code</div>
+        <div class="second_sub_row" id="pin_number">{{ address.pin }}</div>
+        <div class="third_sub_row" id="edit_button_adr"><button id="edit_pin_btn">Edit</button></div>
+      </div>
+    </li>
+    <li id="city">
+      <div id="city_row">
+        <div class="first_sub_row" id="house_no_heading">City</div>
+        <div class="second_sub_row" id="city_name">{{ address.city }}</div>
+      </div>
+    </li>
+    {% endfor %}</div>
+  </div></div>
+  </div>
+</body>
+{% endblock %}

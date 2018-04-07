@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title_block %}Shri Bari Stores{% endblock %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
+<link href="https://fonts.googleapis.com/css?family=Macondo|Ubuntu" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Courgette|Lobster" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script>if($(window).width()>494){$("#home-link").css({'border-bottom': '2px solid black'});}else{$("#home-link").css({'color': '#1c4752'});}
+$(window).resize(function(){
+  if($(window).width()<494){
+    $("#home-link").css({'border-bottom': 'none', 'color':'#1cf4576'});
+  }
+  else{
+    $("#home-link").css({'color':'black', 'border-bottom':'2px solid black'});
+  }
+});
+</script>
+<body>
+  <div id="content">
+    <div id="text_containers"><div id="main_intro"><img id="background_image" src="/media/b0.jpg"><img id="background_image_1" src="/media/b1.jpg"><img src="/media/b2.jpeg" id="background_image_2"><img src="/media/b3.jpg" id="background_image_3"><img src="/media/b4.jpg" id="background_image_4"><div id="main_intro_text">
+      <div id="main_intro_heading"><h2>ShriBariStores</h2></div><div id="main_intro_description"><span><p>Founded in 1984, we sell grocery items like pulses, spices, flours etc. All of them are home processed locally at our own premises. We have gained quite a reputation in Dhaulpur Rajasthan, for the quality of products we sell, and now plan to expand it further.</p></span></div></div></div><div id="sub_containers">
+      <div id="container_1_left" class="sub_container"><div id="container_1_left_heading"><span class="left_container_heading"><h3>Chemical Free</h3></span></div>
+      <!-- <div id="container_1_text"><span>Unpolished, No Artificial Color.</span></div> -->
+    </div>
+      <div id="container_2_middle" class="sub_container"><div id="container_2_middle_heading"><span class="middle_container_heading"><h3>Best Quality</h3></span></div>
+      <!-- <div id="container_2_text"><span>Hand Picked</span></div> -->
+    </div>
+      <div id="container_3_right" class="sub_container"><div id="container_3_right_heading"><span class="right_container_heading"><h3>Inexpensive</h3></span></div>
+      <!-- <div id="container_3_text"><span>Without Comprmising with quality</span></div></div> -->
+    </div>
+      <div id="shop-now-button"><a href="{% url 'products:products_list' p_n=1 %}"id="shop-now">Shop Now</a></div>
+    </div>
+  </div>
+<script>
+var i1=document.getElementById("background_image");var i2=document.getElementById("background_image_1");var aspect_ratio = function(img_obj){
+    this.ratio = img_obj.height/img_obj.width;
+    this.height = img_obj.height;
+    this.width = img_obj.width;
+}
+var main_image = aspect_ration(i1);
+</script>
+</body>
+{% endblock %}

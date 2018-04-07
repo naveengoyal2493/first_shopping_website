@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+Shopping Cart
+{% endblock %}
+{% block head %}<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW"> {% endblock %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'shopping_cart.css' %}">
+<body>
+<div id="content">
+  <div id="shopping_cart_items" class="shopping-cart-items">
+
+      {% for order in to_order %}
+    <div id="all_product_details" class="{{ order.id }}">
+      <div id="product_name_and_image"><div id="product_name"><h4>{{ order.product_id.product_name }}</h4></div>
+      <div id="product_image"><img src="{{ order.product_id.product_image.url }}" height="150px" width="200px"></div></div>
+      <div id="order_details"><div id="quantity_ordered"><strong>Ordered Quantity : </strong><span id="ordered-quantity">{{ order.quantity }}</span> gms.</div>
+      <div id="amount_to_pay"><strong>To Pay : </strong>&#8377; <span id="order_cost">{{ order.amount_to_pay }}</span></div>
+      <div id="change_quantity"><input type="number" placeholder="Change Quantity...." id="change_amount"><button type="submit" id="change_amount_of_order">Change</button></div>
+      <div id="original-rate"><div id="original-rate-values"><strong>Original Rate : </strong> &#8377; <span id="original_rate">{{ order.product_id.price }}</span> <strong>PER</strong> <span id="per_amount">{{ order.product_id.base_quantity }}</span> gms.</div></div>
+      <div id="remove_button"><button id="remove_current_order">Remove This Item</button></div>
+    </div>
+  </div>{% endfor %}
+
+    <div id="total_amount_to_pay">Total Amount To Pay : &#8377; {{ total_amount }}</div>
+    <div id="place_order"><button type="submit" id="place-order">Place Orders</button></div>
+  </div>
+</div>
+<script>
+function getCookie(name)
+{
+  if(document.cookie && document.cookie !=''){
+    var cookies = document.cookie.split(';');
+    for(var i=0; i<cookies.length; i++)
+    {
+      var cookie = jQuery.trim(cookies[i]);
+      if(cookie.substring(0, name.length+1) == (name+ '=')){
+        cookieValue = decodeURIComponent(cookie.substring(name.length+1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+function csrfSafeMethod(method){
+  return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+var csrftoken = getCookie('csrftoken');
+$.ajaxSetup({
+  beforeSend: function(xhr, settings){
+    if(!csrfSafeMethod(settings.type) && !this.crossDomain){
+      xhr.setRequestHeader("X-CSRFToken", csrftoken);
+    }
+  }
+});
+$(document).ready(function(){
+  $("#shopping_cart_items #remove_current_order").click(function(){
+    var order_id = $(this).parent().parent().parent().attr('class');
+    console.log(order_id);
+    $.ajax({
+      type:'post',
+      url: '',
+      data: {
+        'action':'delete',
+        'entry_id': order_id,
+      },
+      success: function(){
+        location.reload();
+      }
+    });
+  });
+  $("#shopping_cart_items #change_amount_of_order").click(function(){
+    var order_id = $(this).parent().parent().parent().attr('class');
+    var new_quantity = $('.'+order_id).find("#change_amount").val();
+    $.ajax({
+      type:'post',
+      url: '',
+      data: {
+        'action':'change',
+        'entry_id': order_id,
+        'new_quantity': new_quantity,
+      },
+      success: function(){
+        location.reload();
+      }
+    });
+  });
+  $("#place-order").click(function(){
+    $.ajax({
+      type:'post',
+      url: '',
+      data: {
+        'action':'order',
+      },
+      success: function(){
+        location.reload("{% url 'products:home' %}");
+      }
+    });
+  });
+});
+</script>
+</body>
+{% endblock %}

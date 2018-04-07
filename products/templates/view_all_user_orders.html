@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+My Orders
+{% endblock %}
+{% block head %}<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW"> {% endblock %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'user_orders_page.css' %}">
+  <script>if($(window).width()>360){$("#all_orders").css({'border-bottom': '2px solid black'});}else{
+    $("#all_orders").css({'color': '#1c4752'});}
+  </script>
+<body>
+<div id="orders_record_content">
+<div id="past_orders"><table border=1 cellpadding="14" id="completed_orders"><h3>Past Orderes</h3>
+<tr><th>Product Name</th><th>Quantity Ordered</th><th>Order Placed At</th><th>Amount Payed</th></tr>
+{% for order in orders_completed %}
+<tr><td>{{ order.ordered_item }}</td><td>{{ order.quantity }} <strong>gms.</strong></td><td>{{ order.order_date }}</td><td>&#8377; {{ order.paying_amount }}</td></tr>
+{% endfor %}
+</table></div>
+<div id="recent_orders"><table border=1 cellpadding="14" id="ordered_recently"><h3>Orders to be delievered</h3>
+<tr><th>Product Name</th><th>Quantity Ordered</th><th>Order Placed At</th><th>Amount to Pay</th></tr>
+{% for order in orders_pending %}
+<tr><td>{{ order.ordered_item }}</td><td>{{ order.quantity }} <strong>gms.</strong></td><td>{{ order.order_date }}</td><td>&#8377; {{ order.paying_amount }}</td></tr>
+{% endfor %}
+</table></div>
+</div>
+</body>
+{% endblock %}

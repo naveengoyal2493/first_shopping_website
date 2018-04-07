@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /enter_address/
+Disallow: /all_orders/
+Disallow: /check_orders/
+Disallow: /shopping_cart/
+Disallow: /logout_user/
+Disallow: /profile/*/

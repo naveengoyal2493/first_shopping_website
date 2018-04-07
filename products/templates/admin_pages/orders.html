@@ -1,0 +1,75 @@
+{% load staticfiles %}
+<html>
+<title>Manager {{ user.username }}</title>
+<head>
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+  <link rel="stylesheet" type="text/css" href="{% static 'special_pages.css' %}">
+</head>
+<h1>Welcome <span id="admin_name">{{ user.username }}</span></h1>
+<style>
+</style>
+<body>
+<div id="orders_pending">
+  <div id="orders_block" class="orders_to_deliever">
+    {% for user_order, address in pending_orders %}
+      <div id="user_order" class="user_id_{{ user_order.0.user_object.id }}">
+        <div id="customer_name"><strong> {{ user_order.0.user_object.first_name }} {{ user_order.0.user_object.last_name }}'s Orders</strong></div>
+        <div id="Delievery_address">
+          <strong>Delievery Address : </strong><span id="house_no">{{ address.house_no }}, </span><span id="street">{{ address.street }}, </span><span>{{ address.district }}, </span><span id="city">{{ address.city }}, </span><span id="state">{{ address.state }}, </span><span id="pin">{{ address.pin }}</span>
+        </div>
+        <div id="customer_orders">
+          <div id="item_container"><div id="item_name">
+            <span id="orders_names"><strong>Item Name</strong></span>
+          </div>
+          <div id="ordered_quantity_keyword">
+            <span><strong>Quantity Ordered</strong></span>
+          </div>
+          <div id="each_item_cost_keyword">
+            <span><strong>Rate for Quantity</strong></span>
+          </div></div>
+
+          {% for order_details in user_order %}
+        <li id="items_list" class="ordered_item"><div id="item_container" class="item-{{ order_details.ordered_items.id }}"><div id="item_name">
+          <span id="orders_names">{{ order_details.ordered_item.product_name }}</span>
+        </div>
+        <div id="ordered_quantity">
+          <span>{{ order_details.quantity }}</span> <strong> gms.</strong>
+        </div>
+        <div id="each_item_cost" class="item_cost">
+          <strong> &#8377;</strong> <span class="per_item_paying_amount">{{ order_details.paying_amount }}</span>
+        </div></div></li>
+        {% endfor %}</div>
+        <div id="total_bill" class="total_amount_on_orders"><strong>TOTAL BILL : </strong> <strong> &#8377;</strong> <span class="bill_amount_to_pay">43</span></div>
+        <div id="mark_as_delievered" class="{{ user_order.0.user_object.id }}">
+          <button id="order_delievered" class="delievery_confirmation">Mark as Delievered</button>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <script>
+  var order_divs = document.getElementsByClassName("orders_to_deliever")[0].children;
+  for(var i=0; i<order_divs.length; i++)
+  {
+    var ordered_items = order_divs[i].getElementsByClassName("ordered_item");var sum=0;
+    for(var j=0; j<ordered_items.length; j++)
+    {
+      var s=ordered_items[j].getElementsByClassName("per_item_paying_amount");
+      sum+=parseInt(s[0].innerText);
+    }
+    var x = order_divs[i].getElementsByClassName("bill_amount_to_pay");
+    x[0].innerHTML=sum;
+  }
+  var order_delievered = document.getElementsByClassName("delievery_confirmation");
+  for(var i=0; i<order_delievered.length; i++){order_delievered[i].onclick=function(){
+    var cust_id = this.parentElement.className;
+    var sure_element = document.createElement("div");
+    sure_element.id="delievery_confirmation";
+    sure_element.innerHTML="<span id=\"confirmation_ques\"><strong>Are You Sure? </strong></span><form method=\"post\">{% csrf_token %}<input type=\"submit\" id=\"confirm_yes\" name=\"order_delievered\"value=\"Delievered\"><input type=\"hidden\" name=\"user_id\" value=\""+cust_id+"\"></form><button id=\"confirm_no\">No</button>"
+    var product_class = this.parentElement.parentElement.className;
+    // console.log(product_class);
+    var order = document.getElementsByClassName(product_class);
+    order[0].appendChild(sure_element);  }}
+  </script>
+</div>
+</body>
+</html>

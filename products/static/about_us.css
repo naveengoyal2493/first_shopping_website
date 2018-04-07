@@ -1,0 +1,47 @@
+#about-us-content{
+  margin-top: 10px;
+  width: 80%;
+  margin-left: 10%;
+  background-color: #d0c9c9;
+}
+#about-us-article p{
+  text-align: justify;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'Vollkorn', serif;
+}
+#article-1{
+  margin-top: 30px;
+}
+#article-1, #article-2, #article-3{
+  display: inline-block;
+  margin-bottom: 30px;
+}
+#article-1 p{
+    margin-right: 30px;
+    width: 60%;
+    float: right;
+}
+#article-2 p{
+  width: 50%;
+  float: left;
+  margin-left: 30px;
+}
+#article-2 img{
+  float: right;
+  margin-right: 30px;
+}
+#article-3 p{
+  margin-left: 20px;
+  margin-right: 20px;
+  text-align: justify;
+}
+#article-4 h4{
+  font-size: 24px;
+  text-align: center;
+  margin: 0px;
+}
+#article-4 p{
+  margin-left: 30px;
+  margin-right: 30px;
+}

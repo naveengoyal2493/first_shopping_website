@@ -1,0 +1,45 @@
+#container-fluid{
+  width: 80%;
+  margin-left: 10%;
+}
+h3{
+  margin-left: 11%;
+  font-size: 24px;
+  color: #10232d
+}
+#submit-login button{
+  border: none;
+  padding: 10px;
+  color: white;
+  background-color: #1d465c;
+  font-weight: bold;
+  margin-top: 1%;
+  margin-left: 11%;
+  cursor:pointer;
+}
+#submit-login button:hover{
+  background-color: #245a79;
+}
+#username-form{
+  margin: 1%;
+}
+#password-form{
+  margin: 1%;
+}
+#username-form label{
+  float: left;
+  margin-top: .5%;
+  clear:both;
+  margin-right: 2%;
+  font-size: 20px;
+}
+#password-form label{
+  font-size: 20px;
+  float: left;
+  margin-top: .5%;
+  clear:both;
+  margin-right: 2.45%;
+}
+#login-form input{
+  padding: 7px;
+}

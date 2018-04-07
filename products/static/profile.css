@@ -1,0 +1,112 @@
+#profile-content{
+  position: absolute;
+  top: 95px;
+  width: 80%;
+  margin-left: 10%;
+}
+h3{ margin: 0px;}
+#personal-details{
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+#personal-details-container{
+  margin-top: 10px;
+}
+#personal-details li{
+  list-style: none;
+  padding: 10px;
+  background-color: #eceaea;
+  border-left: 1px solid #bab2b2;
+  border-top: 1px solid #bab2b2;
+  border-right: 1px solid #bab2b2;
+}
+#email{
+  border-bottom: 1px solid #bab2b2;
+}
+.first_sub_row{
+  font-size: 18px;
+  font-weight: bold;
+}
+.second_sub_row{
+  margin-left: 6px;
+  margin-top: 6px;
+  color: #504040;
+}
+#edit_button button, #edit_button_adr button{
+  float: right;
+  position: relative;
+  bottom: 35px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  background-color: #1c4752;
+  color: white;
+   padding: 8px 18px;
+}
+#edit_button button:hover{
+  background-color: #2b6b7b;
+}
+
+#edit_button_adr button:hover{
+  background-color: #2b6b7b;
+}
+#temporary-edit-form{
+  margin-top: 10px;
+}
+#temporary-edit-form label{
+  margin-left: 10px;
+  font-size: 20px;
+  position: relative;
+  left: 10%;
+}
+#temporary-edit-form input[type=text], #temporary-edit-form input[type=number]{
+    padding: 12px 18px;
+    position: relative;
+    left: 23%;
+    width: 40%;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+#temporary-edit-form input[type=submit]{
+   background-color: #1c4752;
+   color: white;
+   padding: 10px 18px;
+   font-family: serif;
+   font-size: 14px;
+   margin: 8px 0;
+   position : relative;
+   left: 25%;
+   border: none;
+   cursor: pointer;
+}
+#temporary-edit-form input[type=submit]:hover{
+  background-color: #317a8d;
+}
+#delievery_address li{
+  list-style: none;
+  padding: 10px;
+  background-color: #eceaea;
+  border-left: 1px solid #bab2b2;
+  border-top: 1px solid #bab2b2;
+  border-right: 1px solid #bab2b2;
+}
+#city{
+  border-bottom: 1px solid #bab2b2;
+}
+#other-details-container{
+  margin-top: 10px;
+}
+.fourth_sub_row{
+  text-align: center;
+  display: none;
+}
+.fourth_sub_row select{
+  background-color: #1c4752;
+  color: white;
+  margin-top: 10px;
+   padding: 8px 20px;
+   font-family: serif;
+   position: relative;
+
+}

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title_block %}Log In{% endblock %}
+{% block head %}<META NAME="ROBOTS" CONTENT="NOINDEX, FOLLOW"> {% endblock %}
+{% block content %}
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<body>
+  <script>
+  if($(window).width()>494){$("#login_link").css({'border-bottom': '2px solid black'});}else{$("#login_link").css({'color': '#1c4752'});}
+  $(window).resize(function(){
+    if($(window).width()<494){
+      $("#login_link").css({'border-bottom': 'none', 'color':'#1cf4576'});
+    }
+    else{
+      $("login_link").css({'color':'black', 'border-bottom':'2px solid black'});
+    }});
+  </script>
+<link rel="stylesheet" type="text/css" href="{% static 'login.css' %}">
+{% if user.is_authenticated %}
+<div id="content">
+You are already Logged In!
+</div>
+{% else %}
+<div id="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Log In</h3>
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                    <form id="login-form" role="form" action="{% url 'products:login_user'%}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div id="username-form">
+                            <label for="id_username">
+                                <strong>Username:</strong>
+                            </label>
+                            <div id="input-username">
+                                <input id="id_username" maxlength="30" name="username" placeholder="Enter Username..." type="text">
+                            </div>
+                        </div>
+                        <div id="password-form">
+                            <label for="id_password">
+                                <strong>Password:</strong>
+                            </label>
+                            <div id=input-pasword>
+                                <input id="id_password" maxlength="30" name="password" placeholder="Enter password.." type="password">
+                            </div>
+                        </div>
+                        <div id="submit-form">
+                            <div id="submit-login">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="panel-footer">
+                    Don't have an account? <a href="{% url 'products:register_user' %}">Click here</a> to register.
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>{% endif %}
+</body>
+{% endblock %}

@@ -1,0 +1,25 @@
+#user_address_details{
+    margin-top: 10px;
+}
+#address_input_form{
+    width: 80%;
+    margin-left: 10%;
+}
+#address_input_form div{
+    padding: 10px;
+    width: 80%;
+    font-size: 20px;
+}
+#address_input_form input{
+    padding: 7px;
+}
+#submit_button input[type=submit]{
+    border: none;
+    background-color: #1c4752;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+#submit_button input[type=submit]:hover{
+    background-color: #276473;
+}

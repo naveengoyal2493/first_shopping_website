@@ -1,0 +1,271 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+Shop products
+{% endblock %}
+{% block content %}
+<script>if($(window).width()>494){$("#products_link").css({'border-bottom': '2px solid black'});}else{
+  $("#products_link").css({'color': '#1c4752'});}
+  $(window).resize(function(){
+    if($(window).width()<494){
+      $("#products_link").css({'color': '#1c4752'});
+      $("#products_link").css({'border-bottom': 'none'});
+    }
+    else{
+      $("#products_link").css({'border-bottom': '2px solid black'});
+        $("#products_link").css({'color': 'black'});
+    }
+  });
+</script>
+<link rel="stylesheet" type="text/css" href="{% static 'products.css' %}">
+<body><div id="full_content">
+  <div id="search-product-input"><form method="get" action=""><input type="text" name="search_keyword" placeholder="Search for products..."><button type="submit" name="search_product" value="search"></button></form></div>
+  <div id="pagination">
+    <ul></ul>
+  </div>
+<div id="products-content">
+
+    <div id="product-container"  class="{{ product.id }}"><div id="product-title"><h3></h3></div>
+        <div id="product-image">
+          <img src="{{ product.product_image.url }}">
+        </div>
+        <div id="price-and-unit">
+            <span id="price"><strong>&#8377; </strong></span>&nbsp;<span id="base_amount"><strong> gms.</strong></span>
+        </div>
+        <div id="place-order">
+
+          <input type="number" id="amount-of-order" placeholder="Enter amount in grams..">
+          <button id="add_to_cart" class="btn-{{ product.id }}">Add To Cart</button>
+
+          <strong><a href="{% url 'products:login_user' %}" id="login_to_shop">Login To Shop</a></strong>
+
+        </div>
+    </div>
+<script>
+
+</script>
+</div>
+<div id="product-filters">
+  <div id="product-filters-heading"><h3 syle="margin:0px">Filters</h3></div>
+  <div id="filter-1">
+    <div id="catogories"><div id="catogories-heading"><h4>Catogories</h4></div>
+      <div id="filter-options">
+        <!-- <form action="" enctype="application/json" method="post" id="catogories-filter-form"> -->
+          <!-- {% csrf_token %} -->
+          <input type="checkbox" name="Spices" value="spices" id="spices">
+          <label for="spices">Spices</label>
+          <input type="checkbox" name="Cereals" value="cereals" id="cereals">
+          <label for="cereals">Cerials/Dal</label>
+          <input type="checkbox" name="Flour" value="flour" id="flour">
+          <label for="flour">Flour</label>
+          <button id="submit-filters">Apply Filters</button>
+        <!-- </form> -->
+      </div>
+    </div>
+  </div>
+
+  <script>function getCookie(name)
+  {
+    if(document.cookie && document.cookie !=''){
+      var cookies = document.cookie.split(';');
+      for(var i=0; i<cookies.length; i++)
+      {
+        var cookie = jQuery.trim(cookies[i]);
+        if(cookie.substring(0, name.length+1) == (name+ '=')){
+          cookieValue = decodeURIComponent(cookie.substring(name.length+1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+  function csrfSafeMethod(method){
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+  }
+  $(document).ready(function(){
+    $("#products-content #add_to_cart").click(function(){
+      console.log("clicked");
+      var ord_id = $(this).parent().parent().attr('class');
+      var amount = $("."+ord_id+" input[type=number]").val();
+      if(amount && parseInt(amount)){
+      var csrftoken = getCookie('csrftoken');
+      $.ajaxSetup({
+        beforeSend: function(xhr, settings){
+          if(!csrfSafeMethod(settings.type) && !this.crossDomain){
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+          }
+        }
+      });
+        $.ajax({
+          type: 'POST',
+          url: "",
+          data: {
+            'request_type': 'order',
+            'product_id': ord_id,
+            'amount': amount,
+            'the_user_id':{{ user.id }}
+          },
+          success: function(data){
+            $('.'+ord_id).find("#place-order").html('<div id="order_placed_in_cart">Your order has bee added to cart. Click <a href="{% url 'products:cart' %}">here</a> to go to cart or continue shopping.</div>');
+
+          }
+        });
+      }
+      else if(!$(this).is('a')){
+        if(!parseInt(amount)){
+          alert('The amount should not contain any Alphabet!');
+        }
+        else{
+        alert('Enter the amount to order!');}
+      }
+    });
+  });
+  $(document).ready(function(){
+    $("#submit-filters").click(function(){
+
+      var checked_filters =[]
+      var filters_obj=$("#filter-options").children();
+      for(var i in filters_obj){
+        if(filters_obj[i].checked){checked_filters.push(filters_obj[i]);}
+      }
+      var json_string="";
+      for(var c in checked_filters){
+        if( json_string!="")
+        json_string+="&"
+        json_string+=checked_filters[c].name+"="+checked_filters[c].value;
+      }
+      console.log(json_string);
+      var csrftoken = getCookie('csrftoken');
+      $.ajaxSetup({
+        beforeSend: function(xhr, settings){
+          if(!csrfSafeMethod(settings.type) && !this.crossDomain){
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+          }
+        }
+      });
+      $.ajax({
+      type:'POST',
+      url: '',
+      // contentType: 'application/json; charset=utf-8',
+      data:{
+          'product_filters':json_string
+        },
+        success: function(data){
+          console.log("Done!")
+        }
+      });
+    // });
+  });});
+  // console.log("{{ previously_requested }}");
+  {% if previously_requested %}
+  var prev_filter_req = "{{ previously_requested|safe }}";
+  console.log(prev_filter_req)
+  // console.log(prev_filter_req)
+  // console.log(typeof(prev_filter_req))
+  var inv_com = false;var temp_str="";var fil_list=[]
+  for(var i=0; i<prev_filter_req.length-1; i++)
+  {
+    if(prev_filter_req[i]=='\'')
+    {
+      if(!inv_com)
+      {
+        inv_com=true;
+      }
+      else{
+        inv_com=false;
+        fil_list.push(temp_str);temp_str="";
+      }
+    }
+    if(prev_filter_req[i]!='\''&&inv_com){
+      temp_str+=prev_filter_req[i];
+    }
+
+  }
+  for(x in fil_list){
+    $("#"+fil_list[x]).prop('checked', 'true');
+  }
+  // console.log(fil_list);
+  {% endif %}
+  if($(window).width()<673)
+  {
+    $("#product-filters").attr('class', 'filter-toggle-button');
+    $("#full_content").prepend('<div id="hidden-filter"></div>');
+    $("#hidden-filter").append($("#product-filters"));
+    $("#hidden-filter").attr('class', 'shown');
+    $("#product-filters").css({'float':'none', 'display':'inline'});
+    $("#catogories-heading h4").css({'margin': '0px', 'margin-left': '10px'});
+    $("#show-hide").click(function(){
+      $("#product-filters").toggleClass("filter-toggle-button");
+    });
+  }
+  $(window).resize(function(){
+    if($(window).width()<673&&$("#hidden-filter").length==0){
+      $("#product-filters").attr('class', 'filter-toggle-button');
+      $("#full_content").prepend('<div id="hidden-filter"></div>');
+      $("#hidden-filter").append($("#product-filters"));
+      $("#hidden-filter").attr('class', 'shown');
+      $("#product-filters").css({'float':'none', 'display':'inline'});
+      $("#catogories-heading h4").css({'margin': '0px', 'margin-left': '10px'});
+      $("#show-hide").click(function(){
+        $("#product-filters").toggleClass("filter-toggle-button");
+      });
+    }
+    else if($(window).width()>673){
+      if($("#product-filters").parent().attr('id')=="hidden-filter"){
+      $("#full_content").append($("#product-filters"));
+      $("#hidden-filter").remove();
+      $("#product-filters").css({'float':'right', 'display':'block'});
+      }
+    }
+  });
+   </script>
+</div></div>
+<div id="pagination">
+  <ul></ul>
+</div>
+<script>
+var c_p = parseInt("{{ current_page }}");
+function next_p(){
+    location.href="/products/"+(c_p+1)+"/"
+}
+function previous_page(){
+  location.href="/products/"+(c_p-1)+"/"
+}
+$(document).ready(function(){
+    var pages=parseInt("{{ no_of_pages }}");
+    for(var pag=0; pag<pages; pag++)
+    {
+      if(pag==parseInt("{{ current_page }}"-1))
+      {$("#pagination ul").append('<li id="current_page" class="page_no" >'+(pag+1)+'</li>');}
+      else{
+        {$("#pagination ul").append('<li id="page_'+pag+' class="page_no" "><a href="/products/'+(pag+1)+'">'+(pag+1)+'</a></li>');}
+      }
+    }
+    if(pages>1){
+        $("#pagination ul").append('<li id="next_page" class="page_no"><button id="next_page_button" onclick="next_p()"></button></li>');
+    }
+    if(parseInt("{{ current_page }}")>1){
+      $("#pagination ul").prepend('<li id="previous_page" class="page_no"><button id="previous_page_button" onclick="previous_page()"></button></li>');
+    }
+    if(pages==c_p){
+      $("#pagination ul #next_page").remove();
+    }
+    var product_list = [];
+    var product_object = function(product_id, name, product_type, price, product_image, base_quantity){
+      this.product_id = product_id;
+      this.product_name = name;
+      this.poduct_type = product_type;
+      this.pice = price;
+      this.product_image = product_image;
+      this.base_quantity  = base_quantity;
+    }
+    {% for item in products_list %}
+      var x = new product_object({{ item.id }}, "{{ item.product_name }}", {{ item.price }}, "{{ item.product_image.url }}", {{ item.base_quantity }})
+      product_list.push(x);
+    {% endfor %}
+    console.log(product_list);
+  });
+
+</script>
+</body>
+{% endblock %}

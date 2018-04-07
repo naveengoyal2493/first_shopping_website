@@ -1,0 +1,23 @@
+#login-form{
+  width: 80%;
+  margin-left: 10%;
+}
+#register_btn{
+  padding: 10px;
+  border:none;
+  background-color: #1c4752;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+#register_btn:hover{
+  background-color: #286271;
+}
+.form-horizontal{
+}
+.form-horizontal input{
+  padding: 5px;
+}
+.form-horizontal label{
+  font-size: 20px;
+}

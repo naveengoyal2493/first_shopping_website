@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title_block %}Sign Up{% endblock %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'registration_form.css' %}">
+  <script>if($(window).width()>494){$("#register_link").css({'border-bottom': '2px solid black'});}else{$("#register_link").css({'color': '#1c4752'});}
+  $(window).resize(function(){
+    if($(window).width()<494){
+      $("#register_link").css({'border-bottom': 'none', 'color':'#1cf4576'});
+    }
+    else{
+      $("register_link").css({'color':'black', 'border-bottom':'2px solid black'});
+    }});</script>
+<body>
+  <div id="login-form">
+    <h3>Create new Account</h3>
+    <form class="form-horizontal" role="form" action="" method="post">
+      {% csrf_token %}
+      {% include 'form_template.html' %}<br>
+      <button type="submit" id="register_btn">Register</button>
+    </form>
+    <div id="submission_errors"></div>
+  </div>
+  <script>
+  $(document).ready(function(){
+    $("#register_btn").click(function(){
+      console.log("clicked");
+        var pass = $("#id_password").val();
+        var pass2 = $("#id_confirm_password").val();
+
+      if(pass!=""&&pass2!=""&&pass==pass2){
+        $("#submission_errors").append('<span id="passwords_matched" style="color: green;">Passwords Matched!</span>');
+      }
+      else{
+        $(this).attr('disabled', 'disabled');
+        $("#submission_errors").append('<span id="unmatched_passwords" style="color: red;"><strong>You passwords do not Match! Please renter the details after page reloads</strong></span>');
+        // location.reload(4000);
+        setTimeout(location.reload.bind(location), 2000);
+      }
+    });
+  });
+  </script>
+</body>
+{% endblock %}

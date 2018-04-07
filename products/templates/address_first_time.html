@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+Enter address
+{% endblock %}
+{% block head %}<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW"> {% endblock %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'add_address.css' %}">
+<body><div id="user_address_details"><div id="address_input_form">
+  <form class="form-horizontal" role="form" action="" method="post">
+    {% csrf_token %}
+    <div id="select_city"><label for="city">City : </label><select name="city">
+      <option>Dholpur</option>
+    </select></div>
+    <div id="house_no_input"><label for="house_no">House No : </label><input type="text" name="house_no" placeholder="house_no/house_name"></div>
+    <div id="input_stree_name"><label for="street">Street : </label><input type="text" name="street" placeholder="street"></div>
+    <div id="select_district"><label for="district">District : </label><select name="district">
+      <option>Dholpur</option>
+    </select></div>
+    <div id="input_pin_no."><label for="pin">Pin : </label><input type="number" min="100000" max="999999" name="pin" placeholder="pin"></div>
+    <div id="select_area"><label for="area">Area : </label><input type="text" name="area" placeholder="area"></div><div id="select_state"><label for="state">State : </label>
+    <select name="state">
+      <option value="Madhya Pradesh">Madhya Pradesh</option><option value="Rajasthan">Rajasthan</option>
+    </select></div>
+    <div id="submit_button"><input type="submit" class="btn btn-success" value="submit"></div>
+  </form></div>
+</div>
+</body>
+{% endblock %}

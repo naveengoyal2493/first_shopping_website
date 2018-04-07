@@ -1,0 +1,152 @@
+
+body{
+    margin:0;
+    text-decoration:none;
+}
+.navbar{
+    z-index: 10;
+    text-align: left;
+    padding: 10px;
+    color: white;
+    background: linear-gradient(#0a4f5f, #10343ce0);
+    margin-top: 0px;
+}
+.navbar a{
+    text-decoration : none;
+    color: #ffffff;
+    font-weight: bolder;
+    font-family: 'Indie Flower', cursive;
+    font-size: 20px;
+}
+#menubar{
+    padding: 10px;
+    background: linear-gradient(#9c9c9c, #a5a5a5);
+    border-bottom: .5px solid #b9aa8e;
+    z-index: 3;
+}
+#menubar li{
+    z-index: 3;
+    list-style:none;
+  display: inline;
+    text-align: center;
+}
+#login{
+  float: right;
+}
+#register{
+  float: right;
+}
+#products_link, #home-link, #login_link, #register_link{
+    color: #000000;
+    padding: 9px;
+    text-decoration: none;
+    font-weight: bolder;
+}
+ #username_profile_link:hover{
+   text-decoration: underline;
+ }
+#logged_in_user_name{
+  float: right;
+  margin-left: 20px;
+  margin-right: 50px;
+  display:inline;
+  cursor:pointer;
+}
+#hello{
+  border: none;
+  cursor:pointer;
+  background:none;
+}
+#hello:hover{
+}
+#menubar .menu_link:hover{
+    color: black;
+    background-color: #bfbcbc;
+}
+#shopping_cart{
+  float: right;
+}
+#shopping_cart_button{
+
+    border: none;
+    height: 20px;
+    width: 20px;
+    cursor:pointer;
+}
+.menu_expand{
+  display:none;
+}
+#expand-menu{
+  display:inline;
+}
+#user_options{
+  z-index: 7;
+  text-align: left;
+}
+.user_options{
+  display:none;
+}
+.slide_down_menu li{
+  padding: 10px;
+  display: block;
+  float: none;
+  text-align: left;
+}
+#user_options ul{
+  margin: 0px;
+  padding: 0px;
+  position: absolute;
+  border: 1px solid #a1a1a1;
+}
+#user_options li{
+  display: block;
+  padding: 7px 0px;
+  background-color: #a1a1a1;
+}
+#user_options li a{
+  text-decoration: none;
+  color: black;
+  font-size: 13px;
+}
+#user_options li a:hover{
+  text-decoration: underline;
+}
+#footer{
+  background-color: #2a373ac4;
+  list-style: none;
+  text-align: center;
+}
+#footer div{
+  display: inline-block;
+}
+#footer ul{
+  list-style: none;
+}
+#contact_information_list{
+  text-align: left;
+}
+#contact_information_list{
+  padding: 0;
+}
+#contact_information_list span{
+  margin-left:10px;;
+  font-size: 15px;
+}
+#contact_information_list li{
+  padding: 10px;
+  font-size: 13px;
+  border-bottom: 2px solid #ffffff29;
+}
+#about_us_section{
+  float: left;
+}
+#go_to_top_button{
+  float: right;
+}
+#about_us
+{
+  padding: 10px;
+}
+#about_us_link{
+  color: #ffffff;
+}

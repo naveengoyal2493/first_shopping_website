@@ -1,0 +1,189 @@
+*{
+  margin: 0px;
+}
+#content{
+}
+#shopping_cart_items{
+  width: 90%;
+  margin-left: 5%;
+}
+#all_product_details{
+  width: 90%;
+  background-color: #bdbfc8;
+  margin-left: 5%;
+  border: 1px solid black;
+}
+#product_name_and_image{
+  width: 25%;
+  display: inline-block;
+}
+#quantity_ordered{
+  margin-top: 2%;
+  font-size: 20px;
+}
+#amount_to_pay{
+  margin-top: 8px;
+  font-size: 20px;
+}
+#product_name{
+  font-size: 20px;
+  margin-bottom: 1%;
+  text-align: center;
+}
+#product_image{
+  margin-left: 12%;
+  margin-bottom: 5%;
+}
+#order_details{
+  width: 70%;
+  float:right;
+  display: inline-block;
+}
+#change_quantity{
+  margin-top: 2%;
+}
+#change_quantity input[type=number]{
+  padding: 7px;
+}
+#change_amount_of_order{
+  padding: 7.4px;
+  border:none;
+  margin-left: 1%;
+  background-color: #1c4752;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+#change_amount_of_order:hover{
+  background-color: #2a6574;
+}
+#original-rate{
+  margin-top: 1%;
+}
+#original-rate-values{
+  margin-left: 50%;
+}
+#remove_button{
+  margin-top: 1%;
+}
+#remove_button button{
+  position: relative;
+  left: 40%;
+
+}
+#remove_current_order{
+  padding: 7.4px;
+  border:none;
+  margin-left: 1%;
+  background-color: #1c4752;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+#remove_current_order:hover{
+  background-color: #265f6e;
+}
+#total_amount_to_pay{
+  font-size: 20px;
+  margin-top: 1%;
+  text-align: center;
+}
+#place_order button{
+  margin-top: 1%;
+  padding: 7.4px;
+  border:none;
+  margin-left: 46%;
+  background-color: #1c4752;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#place_order button:hover{
+  background-color: #265f6e;
+}
+@media screen and (max-width: 940px){
+  #all_product_details{
+   width: unset;
+   display: inline-block;
+   margin: 0px;
+   margin-top: 1%;
+  }
+  #product_name_and_image{
+    display: block;
+    width: unset;
+  }
+  #order_details{
+    margin-left: 7%;
+    margin-bottom: 1%;
+    float: none;
+  }
+  #original-rate-values{
+    margin-left: 0px;
+  }
+  #remove_button button{
+   left: 0%;
+  }
+}
+@media screen and (max-width: 598px){
+  #all_product_details{
+    width: 100%;
+  }
+  #product_name_and_image{
+    width: 42.5%;
+    display: inline-block;
+  }
+  #product_name{
+    font-size: 15px;
+  }
+  #order_details{
+    font-size: 15px;
+    width: 50%;
+    margin-top: 0px;
+    margin-left: 6%;
+  }
+  #product_image{
+    margin-left: 0;
+
+  }
+  #quantity_ordered{
+    font-size: 15px;
+  }
+  #amount_to_pay{
+    font-size: 15px;
+  }
+  #change_quantity input[type=number]{
+  padding: 2px;
+  }
+  #remove_current_order{
+    padding: 2px;
+  }
+  #change_amount_of_order{
+    padding: 2px;
+  }
+}
+@media screen and (max-width: 462px){
+   #all_product_details{
+   display: block;
+   width:unset;
+   margin-top: 1%;
+  }
+  #product_name_and_image{
+    display: block;
+    margin-left: 10%;
+    width: unset;
+  }
+  #order_details{
+    width:unset;
+    margin-left: 10%;
+    margin-bottom: 8%;
+    float: none;
+  }
+  #original-rate-values{
+    margin-left: 0px;
+    width: unset;
+  }
+  #remove_button button{
+   left: 0%;
+  }
+}
